@@ -1,0 +1,5 @@
+# Set the default behavior to automatically set line ending.
+* text=auto eol=lf
+
+*.[Mm][Dd] text
+

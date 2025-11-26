@@ -21,3 +21,16 @@ Node_s* Node_new(void* pData, size_t ulSize) {
 
 	return pNode;
 } // End of Node_new
+
+void Node_release(Node_s* pNode) {
+	if (NULL == pNode) {
+		return;
+	} // End of if-condition
+
+	if (NULL != pNode->m_pData) {
+		free(pNode->m_pData);
+	} // End of if-condition
+	pNode->m_pData = NULL;
+
+	free(pNode);
+} // End of Node_release

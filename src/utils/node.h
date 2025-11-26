@@ -39,4 +39,15 @@ struct Node_s {
  */
 Node_s* Node_new(void* pData, size_t ulSize);
 
+/**
+ * @brief Release the given instance of the struct Node_s.
+ *
+ * This function can release a given instance of the struct Node_s if you don't use the instance.
+ * Note, if you want to use the data of the field m_pData of the struct Node_s, you should copy the
+ * data of the field m_pData before calling this function.
+ *
+ * @param pNode Give the point of the instance to release.
+ */
+void Node_release(Node_s* pNode);
+
 #endif // End of UTILS_NODE_H

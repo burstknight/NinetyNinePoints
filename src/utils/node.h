@@ -21,6 +21,11 @@ struct Node_s {
 	void* m_pData;
 
 	/**
+	 * @brief This field can store the size of the data.
+	 */
+	size_t m_ulSizeOfData;
+
+	/**
 	 * @brief This field can point the the next node in a linked list.
 	 */
 	Node_s* m_pNextNode;

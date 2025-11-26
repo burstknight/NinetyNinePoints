@@ -10,12 +10,14 @@ Node_s* Node_new(void* pData, size_t ulSize) {
 
 	pNode->m_pPreNode = NULL;
 	pNode->m_pData = NULL;
+	pNode->m_ulSizeOfData = 0;
 	pNode->m_pNextNode = NULL;
 
 	if (NULL == pData || 0 == ulSize) {
 		return pNode;
 	} // End of if-condition
 
+	pNode->m_ulSizeOfData = ulSize;
 	pNode->m_pData = malloc(ulSize);
 	memcpy(pNode->m_pData, pData, ulSize);
 

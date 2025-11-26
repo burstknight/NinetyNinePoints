@@ -22,5 +22,10 @@ message(STATUS "${PROJECT_NAME} version: ${PROJECT_VERSION}")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_C_STANDARD 11)
+message(STATUS "${PROJECT_NAME} C standard: ${CMAKE_C_STANDARD}")
 
 add_subdirectory(./submodules/)
+
+include_directories(./src/)
+add_subdirectory(./src)
+

@@ -121,6 +121,7 @@ install_manifest.txt
 CTestTestfile.cmake
 _deps
 */.cmake/*
+*.cmake
 
 CMakeUserPresets.json
 

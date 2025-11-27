@@ -57,7 +57,7 @@ void* Node_cloneData(Node_s* pNode) {
 		return NULL;
 	} // End of if-condition
 
-	if (0 == pNode->m_ulSizeOfData) {
+	if (NULL == pNode->m_pData || 0 == pNode->m_ulSizeOfData) {
 		return NULL;
 	} // End of if-condition
 

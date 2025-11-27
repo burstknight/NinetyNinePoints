@@ -11,4 +11,6 @@
 - [ ] Implement the necessary data structures.
 	- [ ] Implement the data structures for poker card.
 	- [ ] Implement the data structures for players.
+- [ ] Implement linked list.
+	- [ ] Implement the node struct for linked list.
 

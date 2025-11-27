@@ -51,3 +51,22 @@ size_t Node_setData(Node_s* pNode, void* pNewData, size_t ulSize) {
 
 	return ulSize;
 } // End of Node_setData
+
+void* Node_cloneData(Node_s* pNode) {
+	if (NULL == pNode) {
+		return NULL;
+	} // End of if-condition
+
+	if (0 == pNode->m_ulSizeOfData) {
+		return NULL;
+	} // End of if-condition
+
+	void* pCloneData = malloc(pNode->m_ulSizeOfData);
+	if (NULL == pCloneData) {
+		return NULL;
+	} // End of if-condition
+
+	mempcpy(pCloneData, pNode->m_pData, pNode->m_ulSizeOfData);
+
+	return pCloneData;
+} // End of Node_cloneData

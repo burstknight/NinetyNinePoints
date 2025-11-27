@@ -7,6 +7,8 @@
  * @brief This struct can represent a node for the linked list.
  *
  * @see Node_new
+ * @see Node_release
+ * @see Node_setData
  */
 typedef struct Node_s Node_s;
 struct Node_s {
@@ -49,9 +51,12 @@ Node_s* Node_new(void* pData, size_t ulSize);
  *
  * This function can release a given instance of the struct Node_s if you don't use the instance.
  * Note, if you want to use the data of the field m_pData of the struct Node_s, you should copy the
- * data of the field m_pData before calling this function.
+ * data of the field m_pData before calling this function. Also, if you need copy the data of the node,
+ * you can call the function Node_cloneData() before calling this function.
  *
  * @param pNode Give the point of the instance to release.
+ *
+ * @see Node_cloneData
  */
 void Node_release(Node_s* pNode);
 
@@ -68,5 +73,17 @@ void Node_release(Node_s* pNode);
  * @return Return the size of the new data if this function succeeds to set data of the node. Otherwise, this function will return zero.
  */
 size_t Node_setData(Node_s* pNode, void* pNewData, size_t ulSize);
+
+/**
+ * @brief Clone the data of the node.
+ *
+ * This function can clone the data of the node. Note, if you don't want to use the cloned data,
+ * you have to call the function free() to release the cloned data.
+ *
+ * @param pNode Give the node to clone the data.
+ *
+ * @return Return the point the cloned data if this function succeeds to clone the data from the given node. Otherwise, this function will retun NULL.
+ */
+void* Node_cloneData(Node_s* pNode);
 
 #endif // End of UTILS_NODE_H

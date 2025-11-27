@@ -1,7 +1,6 @@
 #include "unity.h"
 #include "unity_internals.h"
 #include "utils/node.h"
-#include <math.h>
 #include <string.h>
 
 static Node_s* pNode = NULL;
@@ -43,6 +42,20 @@ void test_Node_ZeroDataSize(void) {
 	TEST_ASSERT_EQUAL_PTR(NULL, pNode->m_pData);
 	TEST_ASSERT_EQUAL(0, pNode->m_ulSizeOfData);
 } // End of test_Node_ZeroDataSize
+
+void test_Node_setData(void) {
+	int iData = 25;
+	pNode = Node_new(NULL, 0);
+
+	TEST_ASSERT_NOT_NULL(pNode);
+	TEST_ASSERT_EQUAL_PTR(NULL, pNode->m_pPreNode);
+	TEST_ASSERT_EQUAL_PTR(NULL, pNode->m_pNextNode);
+	TEST_ASSERT_EQUAL_PTR(NULL, pNode->m_pData);
+
+	TEST_ASSERT(sizeof(int) == Node_setData(pNode, &iData, sizeof(int)));
+	TEST_ASSERT(iData == *((int*)pNode->m_pData));
+	TEST_ASSERT(&iData != (int*)pNode->m_pData);
+} // End of test_Node_setData
 
 /**
  * @brief Test the case for giving int data.
@@ -112,6 +125,7 @@ int main(int argc, char** argv) {
 
 	RUN_TEST(test_Node_NullData);
 	RUN_TEST(test_Node_ZeroDataSize);
+	RUN_TEST(test_Node_setData);
 	RUN_TEST(test_Node_Int);
 	RUN_TEST(test_Node_Float);
 	RUN_TEST(test_Node_String);

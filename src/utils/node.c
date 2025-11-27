@@ -41,6 +41,9 @@ size_t Node_setData(Node_s* pNode, void* pNewData, size_t ulSize) {
 		return 0;
 	} // End of if-condition
 
+	/*
+	 * TODO: Here should call free() if pNode->m_pData is not NULL.
+	 */
 	pNode->m_pData = malloc(ulSize);
 	if (NULL == pNode->m_pData) {
 		return 0;

@@ -120,6 +120,40 @@ void test_Node_Struct(void) {
 	TEST_ASSERT_EQUAL_FLOAT(oData.m_fData, ((TestData_s*)pNode->m_pData)->m_fData);
 } // End of test_Node_Struct
 
+void test_Node_cloneData_Null(void) {
+	pNode = NULL;
+	TEST_ASSERT(NULL == Node_cloneData(pNode));
+
+	pNode = Node_new(NULL, 0);
+	TEST_ASSERT_NOT_NULL(pNode);
+	TEST_ASSERT(NULL == Node_cloneData(pNode));
+
+	int iData = 99;
+	Node_setData(pNode, &iData, sizeof(int));
+	pNode->m_ulSizeOfData = 0;
+	TEST_ASSERT(NULL == Node_cloneData(pNode));
+} // End of test_Node_cloneData_Null
+
+void test_Node_cloneData_Succeed(void) {
+	int iData = 99;
+	pNode = Node_new(&iData, sizeof(int));
+	TEST_ASSERT_NOT_NULL(pNode);
+	TEST_ASSERT_EQUAL_PTR(NULL, pNode->m_pPreNode);
+	TEST_ASSERT_EQUAL_PTR(NULL, pNode->m_pNextNode);
+	TEST_ASSERT(NULL != pNode->m_pData);
+
+	int* piCloneData = (int*)Node_cloneData(pNode);
+
+	// Check if the point is correct.
+	TEST_ASSERT(NULL != piCloneData);
+	TEST_ASSERT(piCloneData != &iData);
+	TEST_ASSERT(piCloneData != (int*)pNode->m_pData);
+
+	// Check if the value is correct.
+	TEST_ASSERT(*piCloneData = *((int*)pNode->m_pData));
+	TEST_ASSERT(iData == *piCloneData);
+} // End of test_Node_cloneData_Succeed
+
 int main(int argc, char** argv) {
 	UnityBegin("./test_node.c");
 
@@ -130,6 +164,8 @@ int main(int argc, char** argv) {
 	RUN_TEST(test_Node_Float);
 	RUN_TEST(test_Node_String);
 	RUN_TEST(test_Node_Struct);
+	RUN_TEST(test_Node_cloneData_Null);
+	RUN_TEST(test_Node_cloneData_Succeed);
 
 	return UnityEnd();
 } // End of main

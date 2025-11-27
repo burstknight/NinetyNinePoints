@@ -14,10 +14,6 @@ Node_s* Node_new(void* pData, size_t ulSize) {
 	pNode->m_ulSizeOfData = 0;
 	pNode->m_pNextNode = NULL;
 
-	if (NULL == pData || 0 == ulSize) {
-		return pNode;
-	} // End of if-condition
-
 	Node_setData(pNode, pData, ulSize);
 
 	return pNode;
@@ -41,9 +37,18 @@ size_t Node_setData(Node_s* pNode, void* pNewData, size_t ulSize) {
 		return 0;
 	} // End of if-condition
 
+	if (NULL == pNewData || 0 == ulSize) {
+		return 0;
+	} // End of if-condition
+
 	/*
-	 * TODO: Here should call free() if pNode->m_pData is not NULL.
+	 * Clear old data if the data is not empty.
 	 */
+	if (NULL != pNode->m_pData) {
+		free(pNode->m_pData);
+		pNode->m_pData = NULL;
+	} // End of if-condition
+
 	pNode->m_pData = malloc(ulSize);
 	if (NULL == pNode->m_pData) {
 		return 0;

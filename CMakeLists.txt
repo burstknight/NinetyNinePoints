@@ -29,3 +29,5 @@ add_subdirectory(./submodules/)
 include_directories(./src/)
 add_subdirectory(./src)
 
+enable_testing()
+add_subdirectory(./tests/)

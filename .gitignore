@@ -122,6 +122,7 @@ CTestTestfile.cmake
 _deps
 */.cmake/*
 *.cmake
+build/*
 
 CMakeUserPresets.json
 

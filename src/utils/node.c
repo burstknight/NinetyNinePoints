@@ -1,4 +1,5 @@
 #include "node.h"
+#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -17,9 +18,7 @@ Node_s* Node_new(void* pData, size_t ulSize) {
 		return pNode;
 	} // End of if-condition
 
-	pNode->m_ulSizeOfData = ulSize;
-	pNode->m_pData = malloc(ulSize);
-	memcpy(pNode->m_pData, pData, ulSize);
+	Node_setData(pNode, pData, ulSize);
 
 	return pNode;
 } // End of Node_new
@@ -36,3 +35,19 @@ void Node_release(Node_s* pNode) {
 
 	free(pNode);
 } // End of Node_release
+
+size_t Node_setData(Node_s* pNode, void* pNewData, size_t ulSize) {
+	if (NULL == pNode) {
+		return 0;
+	} // End of if-condition
+
+	pNode->m_pData = malloc(ulSize);
+	if (NULL == pNode->m_pData) {
+		return 0;
+	} // End of if-condition
+
+	pNode->m_ulSizeOfData = ulSize;
+	memcpy(pNode->m_pData, pNewData, ulSize);
+
+	return ulSize;
+} // End of Node_setData

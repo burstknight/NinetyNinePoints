@@ -55,4 +55,18 @@ Node_s* Node_new(void* pData, size_t ulSize);
  */
 void Node_release(Node_s* pNode);
 
+/**
+ * @brief Copy the given data into the node.
+ *
+ * This function can copy the given data into this node. If you want to change the data for a node,
+ * you should call this function.
+ *
+ * @param pNode Give the node to set the data.
+ * @param pNewData Give the new data to copy into the node.
+ * @param ulSize Give the size of the new data.
+ *
+ * @return Return the size of the new data if this function succeeds to set data of the node. Otherwise, this function will return zero.
+ */
+size_t Node_setData(Node_s* pNode, void* pNewData, size_t ulSize);
+
 #endif // End of UTILS_NODE_H

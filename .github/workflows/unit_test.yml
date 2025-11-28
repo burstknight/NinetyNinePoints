@@ -4,7 +4,8 @@ name: CMake on multiple platforms for unit test
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - "*"
   pull_request:
     branches: [ "master" ]
 

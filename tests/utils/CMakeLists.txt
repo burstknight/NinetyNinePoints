@@ -10,3 +10,16 @@ target_link_libraries(
 add_test(
 	test_node test_node
 )
+
+add_executable(
+	test_LinkedList
+	./test_LinkedList.c
+)
+target_link_libraries(
+	test_LinkedList
+	utils
+	unity
+)
+add_test(
+	test_LinkedList test_LinkedList
+)

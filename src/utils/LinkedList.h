@@ -25,4 +25,14 @@ struct LinkedList_s {
 	size_t m_ulNumOfNode;
 };
 
+/**
+ * @brief Create an instance of the struct LinkedList_s.
+ *
+ * This function can create an instance of the struct LinkedList_s, and then return the point of the
+ * instance.
+ *
+ * @return Return the point of an instance of the struct LinkedList_s.
+ */
+LinkedList_s* LinkedList_new();
+
 #endif // End of UTILS_LINKEDLIST_H

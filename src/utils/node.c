@@ -74,7 +74,7 @@ void* Node_cloneData(Node_s* pNode) {
 		return NULL;
 	} // End of if-condition
 
-	mempcpy(pCloneData, pNode->m_pData, pNode->m_ulSizeOfData);
+	memcpy(pCloneData, pNode->m_pData, pNode->m_ulSizeOfData);
 
 	return pCloneData;
 } // End of Node_cloneData

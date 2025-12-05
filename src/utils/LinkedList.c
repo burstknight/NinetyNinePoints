@@ -1,4 +1,5 @@
 #include "LinkedList.h"
+#include "utils/node.h"
 #include <stdlib.h>
 
 LinkedList_s* LinkedList_new() {
@@ -13,3 +14,26 @@ LinkedList_s* LinkedList_new() {
 
 	return pLinkedList;
 } // End of LinkedList_new
+
+int LinkedList_addNodeFront(LinkedList_s* pLinkedList, void* pData, size_t ulSizeOfData) {
+	if (NULL == pLinkedList) {
+		return -1;
+	} // End of if-condition
+
+	Node_s* pNode = Node_new(pData, ulSizeOfData);
+	if (NULL == pNode) {
+		return -1;
+	} // End of if-condition
+
+	if (NULL == pLinkedList->m_pHeadNode) {
+		pLinkedList->m_pTailNode = pNode;
+	} else {
+		pNode->m_pNextNode = pLinkedList->m_pHeadNode;
+		pLinkedList->m_pHeadNode->m_pPreNode = pNode;
+	} // End of if-condition
+
+	pLinkedList->m_pHeadNode = pNode;
+	pLinkedList->m_ulNumOfNode++;
+
+	return 0;
+} // End of LinkedList_addNodeFront

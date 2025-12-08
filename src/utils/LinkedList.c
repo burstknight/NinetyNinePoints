@@ -37,3 +37,28 @@ int LinkedList_addNodeFront(LinkedList_s* pLinkedList, void* pData, size_t ulSiz
 
 	return 0;
 } // End of LinkedList_addNodeFront
+
+void LinkedList_removeNodeFront(LinkedList_s* pLinkedList) {
+	if (NULL == pLinkedList) {
+		return;
+	} // End of if-condition
+
+	if (NULL == pLinkedList->m_pHeadNode) {
+		return;
+	} // End of if-condition
+
+	/*
+	 * Draw out the head node from the linked list to remove.
+	 */
+	Node_s* pRemovedNode = pLinkedList->m_pHeadNode;
+
+	pLinkedList->m_pHeadNode = pLinkedList->m_pHeadNode->m_pNextNode;
+	if (NULL != pLinkedList->m_pHeadNode) {
+		pLinkedList->m_pHeadNode->m_pPreNode = NULL;
+	} // End of if-condition
+
+	pRemovedNode->m_pNextNode = NULL;
+	Node_release(pRemovedNode);
+	pRemovedNode = NULL;
+	pLinkedList->m_ulNumOfNode--;
+} // End of LinkedList_removeNodeFront

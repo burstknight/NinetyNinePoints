@@ -53,4 +53,13 @@ LinkedList_s* LinkedList_new();
  */
 int LinkedList_addNodeFront(LinkedList_s* pLinkedList, void* pData, size_t ulSizeOfData);
 
+/**
+ * @brief Remove the node at the front for the linked list.
+ *
+ * This function can remove the node at the front for the given linked list.
+ *
+ * @param pLinkedList Give the linked list to remove the node at the front.
+ */
+void LinkedList_removeNodeFront(LinkedList_s* pLinkedList);
+
 #endif // End of UTILS_LINKEDLIST_H

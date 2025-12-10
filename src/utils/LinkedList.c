@@ -35,7 +35,7 @@ int LinkedList_addNodeFront(LinkedList_s* pLinkedList, void* pData, size_t ulSiz
 	pLinkedList->m_pHeadNode = pNode;
 	pLinkedList->m_ulNumOfNode++;
 
-	return 0;
+	return (ulSizeOfData > 0 && NULL != pData) ? 0 : 1;
 } // End of LinkedList_addNodeFront
 
 void LinkedList_removeNodeFront(LinkedList_s* pLinkedList) {

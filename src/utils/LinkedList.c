@@ -1,5 +1,7 @@
 #include "LinkedList.h"
 #include "utils/node.h"
+#include <stdbool.h>
+#include <stddef.h>
 #include <stdlib.h>
 
 LinkedList_s* LinkedList_new() {
@@ -76,3 +78,17 @@ void LinkedList_removeNodeFront(LinkedList_s* pLinkedList) {
 	Node_release(pRemovedNode);
 	pRemovedNode = NULL;
 } // End of LinkedList_removeNodeFront
+
+void LinkedList_clearAllNodes(LinkedList_s* pLinkedList) {
+	if (NULL == pLinkedList) {
+		return;
+	} // End of if-condition
+
+	while (true) {
+		if (0 == pLinkedList->m_ulNumOfNode) {
+			break;
+		} // End of if-condition
+
+		LinkedList_removeNodeFront(pLinkedList);
+	} // End of while-loop
+} // End of LinkedList_clearAllNodes

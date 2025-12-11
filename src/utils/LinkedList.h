@@ -73,4 +73,13 @@ Node_s* LinkedList_popNodeFront(LinkedList_s* pLinkedList);
  */
 void LinkedList_removeNodeFront(LinkedList_s* pLinkedList);
 
+/**
+ * @brief Clear all nodes for the given linked list.
+ *
+ * This function can clear all nodes for the given linked list.
+ *
+ * @param pLinkedList Give the linked list to clear all nodes.
+ */
+void LinkedList_clearAllNodes(LinkedList_s* pLinkedList);
+
 #endif // End of UTILS_LINKEDLIST_H

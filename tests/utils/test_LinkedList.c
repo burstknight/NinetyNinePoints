@@ -175,19 +175,57 @@ void test_LinkedList_removeNodeFront(void) {
 	TEST_ASSERT(0 == s_pLinkedList->m_ulNumOfNode);
 } // End of test_LinkedList_removeNodeFront
 
+/**
+ * @brief Test the function LinkedList_clearAllNodes().
+ */
+void test_LinkedList_clearAllNodes(void) {
+	s_pLinkedList = LinkedList_new();
+	for (int i = 0; i < 10; i++) {
+		LinkedList_addNodeFront(s_pLinkedList, &i, sizeof(int));
+	} // End of for-loop
+	TEST_ASSERT(10 == s_pLinkedList->m_ulNumOfNode);
+
+	LinkedList_clearAllNodes(s_pLinkedList);
+	TEST_ASSERT(0 == s_pLinkedList->m_ulNumOfNode);
+	TEST_ASSERT(NULL == s_pLinkedList->m_pHeadNode);
+	TEST_ASSERT(NULL == s_pLinkedList->m_pTailNode);
+
+	LinkedList_clearAllNodes(s_pLinkedList);
+	TEST_ASSERT(0 == s_pLinkedList->m_ulNumOfNode);
+	TEST_ASSERT(NULL == s_pLinkedList->m_pHeadNode);
+	TEST_ASSERT(NULL == s_pLinkedList->m_pTailNode);
+} // End of test_LinkedList_clearAllNodes
+
 int main(int argc, char** argv) {
 	UnityBegin("./test_LinkedList.c");
 
+	/*
+	 * Test the function LinkedList_new().
+	 */
 	RUN_TEST(test_LinkedList_new);
 
+	/*
+	 * Test the function LinkedList_addNodeFront().
+	 */
 	RUN_TEST(test_LinkedList_addNodeFront_Null);
 	RUN_TEST(test_LinkedList_addNodeFront_ZeroDataSize);
 	RUN_TEST(test_LinkedList_addNodeFront_RealData);
 
+	/*
+	 * Test the function LinkedList_popNodeFront().
+	 */
 	RUN_TEST(test_LinkedList_popNodeFront_Null);
 	RUN_TEST(test_LinkedList_popNodeFront_RealData);
 
+	/*
+	 * Test the function LinkedList_removeNodeFront().
+	 */
 	RUN_TEST(test_LinkedList_removeNodeFront);
+
+	/*
+	 * Test the function LinkedList_clearAllNodes().
+	 */
+	RUN_TEST(test_LinkedList_clearAllNodes);
 
 	return UnityEnd();
 } // End of main

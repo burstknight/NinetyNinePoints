@@ -157,6 +157,24 @@ void test_LinkedList_popNodeFront_RealData(void) {
 	TEST_ASSERT(NULL == LinkedList_popNodeFront(s_pLinkedList));
 } // End of test_LinkedList_popNodeFront_RealData
 
+/**
+ * @brief Test the function LinkedList_removeNodeFront().
+ */
+void test_LinkedList_removeNodeFront(void) {
+	s_pLinkedList = LinkedList_new();
+	for (int i = 1; i <= 3; i++) {
+		LinkedList_addNodeFront(s_pLinkedList, &i, sizeof(int));
+	} // End of for-loop
+	TEST_ASSERT(3 == s_pLinkedList->m_ulNumOfNode);
+
+	for (int i = 3; i >= 1; i--) {
+		LinkedList_removeNodeFront(s_pLinkedList);
+		TEST_ASSERT((size_t)i - 1 == s_pLinkedList->m_ulNumOfNode);
+	} // End of for-loop
+
+	TEST_ASSERT(0 == s_pLinkedList->m_ulNumOfNode);
+} // End of test_LinkedList_removeNodeFront
+
 int main(int argc, char** argv) {
 	UnityBegin("./test_LinkedList.c");
 
@@ -168,6 +186,8 @@ int main(int argc, char** argv) {
 
 	RUN_TEST(test_LinkedList_popNodeFront_Null);
 	RUN_TEST(test_LinkedList_popNodeFront_RealData);
+
+	RUN_TEST(test_LinkedList_removeNodeFront);
 
 	return UnityEnd();
 } // End of main

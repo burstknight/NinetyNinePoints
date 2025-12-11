@@ -38,27 +38,36 @@ int LinkedList_addNodeFront(LinkedList_s* pLinkedList, void* pData, size_t ulSiz
 	return (ulSizeOfData > 0 && NULL != pData) ? 0 : 1;
 } // End of LinkedList_addNodeFront
 
-void LinkedList_removeNodeFront(LinkedList_s* pLinkedList) {
+Node_s* LinkedList_popNodeFront(LinkedList_s* pLinkedList) {
 	if (NULL == pLinkedList) {
-		return;
+		return NULL;
 	} // End of if-condition
 
 	if (NULL == pLinkedList->m_pHeadNode) {
-		return;
+		return NULL;
 	} // End of if-condition
 
 	/*
-	 * Draw out the head node from the linked list to remove.
+	 * Draw out the head node from the linked list.
 	 */
-	Node_s* pRemovedNode = pLinkedList->m_pHeadNode;
+	Node_s* pPoppedNode = pLinkedList->m_pHeadNode;
 
 	pLinkedList->m_pHeadNode = pLinkedList->m_pHeadNode->m_pNextNode;
 	if (NULL != pLinkedList->m_pHeadNode) {
 		pLinkedList->m_pHeadNode->m_pPreNode = NULL;
 	} // End of if-condition
 
-	pRemovedNode->m_pNextNode = NULL;
+	pPoppedNode->m_pNextNode = NULL;
+	(pLinkedList->m_ulNumOfNode)--;
+	return pPoppedNode;
+} // End of LinkedList_popNodeFront
+
+void LinkedList_removeNodeFront(LinkedList_s* pLinkedList) {
+	/*
+	 * Draw out the head node from the linked list to remove.
+	 */
+	Node_s* pRemovedNode = LinkedList_popNodeFront(pLinkedList);
+
 	Node_release(pRemovedNode);
 	pRemovedNode = NULL;
-	pLinkedList->m_ulNumOfNode--;
 } // End of LinkedList_removeNodeFront

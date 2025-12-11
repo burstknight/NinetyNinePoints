@@ -54,6 +54,17 @@ LinkedList_s* LinkedList_new();
 int LinkedList_addNodeFront(LinkedList_s* pLinkedList, void* pData, size_t ulSizeOfData);
 
 /**
+ * @brief Pop the node at the front from the linked list.
+ *
+ * This function can pop the node at the front from the linked list.
+ *
+ * @param pLinkedList Give the linked list to pop the node at the front.
+ *
+ * @return Return the point of the node at the front if the given linked list isn't empty. Otherwise, this function will return NULL.
+ */
+Node_s* LinkedList_popNodeFront(LinkedList_s* pLinkedList);
+
+/**
  * @brief Remove the node at the front for the linked list.
  *
  * This function can remove the node at the front for the given linked list.

@@ -55,6 +55,8 @@ Node_s* LinkedList_popNodeFront(LinkedList_s* pLinkedList) {
 	pLinkedList->m_pHeadNode = pLinkedList->m_pHeadNode->m_pNextNode;
 	if (NULL != pLinkedList->m_pHeadNode) {
 		pLinkedList->m_pHeadNode->m_pPreNode = NULL;
+	} else {
+		pLinkedList->m_pTailNode = NULL;
 	} // End of if-condition
 
 	pPoppedNode->m_pNextNode = NULL;

@@ -69,6 +69,9 @@ void LinkedList_removeNodeFront(LinkedList_s* pLinkedList) {
 	 * Draw out the head node from the linked list to remove.
 	 */
 	Node_s* pRemovedNode = LinkedList_popNodeFront(pLinkedList);
+	if (NULL == pRemovedNode) {
+		return;
+	} // End of if-condition
 
 	Node_release(pRemovedNode);
 	pRemovedNode = NULL;

@@ -3,90 +3,92 @@
 #include "utils/LinkedList.h"
 #include "utils/node.h"
 #include <stdbool.h>
+#include <stddef.h>
+#include <stdio.h>
 #include <stdlib.h>
 
-static LinkedList_s* pLinkedList = NULL;
+static LinkedList_s* s_pLinkedList = NULL;
 
 void setUp() {
-	pLinkedList = NULL;
+	s_pLinkedList = NULL;
 } // End setUp
 
 void tearDown() {
-	free(pLinkedList);
-	pLinkedList = NULL;
+	free(s_pLinkedList);
+	s_pLinkedList = NULL;
 } // End of tearDown
 
 /**
  * @brief Test the function LinkedList_new().
  */
 void test_LinkedList_new(void) {
-	pLinkedList = LinkedList_new();
+	s_pLinkedList = LinkedList_new();
 
-	TEST_ASSERT(NULL != pLinkedList);
-	TEST_ASSERT(NULL == pLinkedList->m_pHeadNode);
-	TEST_ASSERT(NULL == pLinkedList->m_pTailNode);
-	TEST_ASSERT(0 == pLinkedList->m_ulNumOfNode);
+	TEST_ASSERT(NULL != s_pLinkedList);
+	TEST_ASSERT(NULL == s_pLinkedList->m_pHeadNode);
+	TEST_ASSERT(NULL == s_pLinkedList->m_pTailNode);
+	TEST_ASSERT(0 == s_pLinkedList->m_ulNumOfNode);
 } // End of test_LinkedList_new
 
 /**
  * @brief Test the function LinkedList_addNodeFront() for NULL data case.
  */
 void test_LinkedList_addNodeFront_Null(void) {
-	TEST_ASSERT(-1 == LinkedList_addNodeFront(pLinkedList, NULL, 0));
+	TEST_ASSERT(-1 == LinkedList_addNodeFront(s_pLinkedList, NULL, 0));
 
-	pLinkedList = LinkedList_new();
-	TEST_ASSERT(1 == LinkedList_addNodeFront(pLinkedList, NULL, 0));
-	TEST_ASSERT(1 == pLinkedList->m_ulNumOfNode);
-	TEST_ASSERT(NULL != pLinkedList->m_pHeadNode);
-	TEST_ASSERT(NULL != pLinkedList->m_pTailNode);
-	TEST_ASSERT(pLinkedList->m_pHeadNode == pLinkedList->m_pTailNode);
+	s_pLinkedList = LinkedList_new();
+	TEST_ASSERT(1 == LinkedList_addNodeFront(s_pLinkedList, NULL, 0));
+	TEST_ASSERT(1 == s_pLinkedList->m_ulNumOfNode);
+	TEST_ASSERT(NULL != s_pLinkedList->m_pHeadNode);
+	TEST_ASSERT(NULL != s_pLinkedList->m_pTailNode);
+	TEST_ASSERT(s_pLinkedList->m_pHeadNode == s_pLinkedList->m_pTailNode);
 
-	TEST_ASSERT(NULL == pLinkedList->m_pHeadNode->m_pData);
-	TEST_ASSERT(0 == pLinkedList->m_pHeadNode->m_ulSizeOfData);
+	TEST_ASSERT(NULL == s_pLinkedList->m_pHeadNode->m_pData);
+	TEST_ASSERT(0 == s_pLinkedList->m_pHeadNode->m_ulSizeOfData);
 
-	Node_release(pLinkedList->m_pHeadNode);
-	pLinkedList->m_pHeadNode = NULL;
-	pLinkedList->m_pTailNode = NULL;
-	pLinkedList->m_ulNumOfNode = 0;
+	Node_release(s_pLinkedList->m_pHeadNode);
+	s_pLinkedList->m_pHeadNode = NULL;
+	s_pLinkedList->m_pTailNode = NULL;
+	s_pLinkedList->m_ulNumOfNode = 0;
 } // End of test_LinkedList_addNodeFront_Null
 
 /**
  * @brief Test the function LinkedList_addNodeFront() for zero data size case.
  */
 void test_LinkedList_addNodeFront_ZeroDataSize(void) {
-	pLinkedList = LinkedList_new();
+	s_pLinkedList = LinkedList_new();
 	int iData = 99;
-	TEST_ASSERT(1 == LinkedList_addNodeFront(pLinkedList, &iData, 0));
-	TEST_ASSERT(1 == pLinkedList->m_ulNumOfNode);
-	TEST_ASSERT(NULL != pLinkedList->m_pHeadNode);
-	TEST_ASSERT(NULL != pLinkedList->m_pTailNode);
-	TEST_ASSERT(pLinkedList->m_pHeadNode == pLinkedList->m_pTailNode);
+	TEST_ASSERT(1 == LinkedList_addNodeFront(s_pLinkedList, &iData, 0));
+	TEST_ASSERT(1 == s_pLinkedList->m_ulNumOfNode);
+	TEST_ASSERT(NULL != s_pLinkedList->m_pHeadNode);
+	TEST_ASSERT(NULL != s_pLinkedList->m_pTailNode);
+	TEST_ASSERT(s_pLinkedList->m_pHeadNode == s_pLinkedList->m_pTailNode);
 
-	TEST_ASSERT(NULL == pLinkedList->m_pHeadNode->m_pData);
-	TEST_ASSERT(0 == pLinkedList->m_pHeadNode->m_ulSizeOfData);
+	TEST_ASSERT(NULL == s_pLinkedList->m_pHeadNode->m_pData);
+	TEST_ASSERT(0 == s_pLinkedList->m_pHeadNode->m_ulSizeOfData);
 
-	Node_release(pLinkedList->m_pHeadNode);
-	pLinkedList->m_pHeadNode = NULL;
-	pLinkedList->m_pTailNode = NULL;
-	pLinkedList->m_ulNumOfNode = 0;
+	Node_release(s_pLinkedList->m_pHeadNode);
+	s_pLinkedList->m_pHeadNode = NULL;
+	s_pLinkedList->m_pTailNode = NULL;
+	s_pLinkedList->m_ulNumOfNode = 0;
 } // End of test_LinkedList_addNodeFront_ZeroDataSize
 
 /**
  * @brief Test the function LinkedList_addNodeFront() for given real data case.
  */
 void test_LinkedList_addNodeFront_RealData(void) {
-	pLinkedList = LinkedList_new();
+	s_pLinkedList = LinkedList_new();
 	for (int i = 1; i <= 3; i++) {
-		TEST_ASSERT(0 == LinkedList_addNodeFront(pLinkedList, &i, sizeof(int)));
+		TEST_ASSERT(0 == LinkedList_addNodeFront(s_pLinkedList, &i, sizeof(int)));
 	} // End of for-loop
 
-	TEST_ASSERT(3 == pLinkedList->m_ulNumOfNode);
-	TEST_ASSERT(NULL != pLinkedList->m_pHeadNode);
-	TEST_ASSERT(NULL != pLinkedList->m_pTailNode);
-	TEST_ASSERT(pLinkedList->m_pHeadNode != pLinkedList->m_pTailNode);
+	TEST_ASSERT(3 == s_pLinkedList->m_ulNumOfNode);
+	TEST_ASSERT(NULL != s_pLinkedList->m_pHeadNode);
+	TEST_ASSERT(NULL != s_pLinkedList->m_pTailNode);
+	TEST_ASSERT(s_pLinkedList->m_pHeadNode != s_pLinkedList->m_pTailNode);
 
 	int iExpectedData = 3;
-	Node_s* pIter = pLinkedList->m_pHeadNode;
+	Node_s* pIter = s_pLinkedList->m_pHeadNode;
 	while (true) {
 		if (NULL == pIter) {
 			break;
@@ -99,7 +101,7 @@ void test_LinkedList_addNodeFront_RealData(void) {
 		iExpectedData--;
 	} // End of while-loop
 
-	pIter = pLinkedList->m_pHeadNode;
+	pIter = s_pLinkedList->m_pHeadNode;
 	while (true) {
 		if (NULL == pIter) {
 			break;
@@ -110,17 +112,62 @@ void test_LinkedList_addNodeFront_RealData(void) {
 		Node_release(pRemovedNode);
 	} // End of while-loop
 
-	pLinkedList->m_pHeadNode = NULL;
-	pLinkedList->m_pTailNode = NULL;
+	s_pLinkedList->m_pHeadNode = NULL;
+	s_pLinkedList->m_pTailNode = NULL;
 } // End of test_LinkedList_addNodeFront_RealData
+
+/**
+ * @brief Test the function LinkedList_popNodeFront() for NULL casees.
+ */
+void test_LinkedList_popNodeFront_Null(void) {
+	TEST_ASSERT(NULL == LinkedList_popNodeFront(s_pLinkedList));
+
+	s_pLinkedList = LinkedList_new();
+	TEST_ASSERT(NULL == LinkedList_popNodeFront(s_pLinkedList));
+} // End of test_LinkedList_popNodeFront_Null
+
+/**
+ * @brief Test the function LinkedList_popNodeFront() for given real data case.
+ */
+void test_LinkedList_popNodeFront_RealData(void) {
+	s_pLinkedList = LinkedList_new();
+	for (int i = 1; i <= 3; i++) {
+		LinkedList_addNodeFront(s_pLinkedList, &i, sizeof(int));
+	} // End of for-loop
+	TEST_ASSERT(3 == s_pLinkedList->m_ulNumOfNode);
+
+	for (int i = 3; i >= 1; i--) {
+		Node_s* pExpectedNode = s_pLinkedList->m_pHeadNode;
+		Node_s* pPoppedNode = LinkedList_popNodeFront(s_pLinkedList);
+
+		TEST_ASSERT(pExpectedNode == pPoppedNode);
+		TEST_ASSERT(NULL != pPoppedNode);
+		TEST_ASSERT(i == *((int*)pPoppedNode->m_pData));
+		TEST_ASSERT((size_t)i - 1 == s_pLinkedList->m_ulNumOfNode);
+
+		Node_release(pPoppedNode);
+		pPoppedNode = NULL;
+		pExpectedNode = NULL;
+	} // End of for-loop
+
+	TEST_ASSERT(0 == s_pLinkedList->m_ulNumOfNode);
+	TEST_ASSERT(NULL == s_pLinkedList->m_pHeadNode);
+	TEST_ASSERT(NULL == s_pLinkedList->m_pTailNode);
+
+	TEST_ASSERT(NULL == LinkedList_popNodeFront(s_pLinkedList));
+} // End of test_LinkedList_popNodeFront_RealData
 
 int main(int argc, char** argv) {
 	UnityBegin("./test_LinkedList.c");
 
 	RUN_TEST(test_LinkedList_new);
+
 	RUN_TEST(test_LinkedList_addNodeFront_Null);
 	RUN_TEST(test_LinkedList_addNodeFront_ZeroDataSize);
 	RUN_TEST(test_LinkedList_addNodeFront_RealData);
+
+	RUN_TEST(test_LinkedList_popNodeFront_Null);
+	RUN_TEST(test_LinkedList_popNodeFront_RealData);
 
 	return UnityEnd();
 } // End of main

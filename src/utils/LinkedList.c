@@ -17,6 +17,15 @@ LinkedList_s* LinkedList_new() {
 	return pLinkedList;
 } // End of LinkedList_new
 
+void LinkedList_release(LinkedList_s* pLinkedList) {
+	if (NULL == pLinkedList) {
+		return;
+	} // End of if-condition
+
+	LinkedList_clearAllNodes(pLinkedList);
+	free(pLinkedList);
+} // End of LinkedList_release
+
 int LinkedList_addNodeFront(LinkedList_s* pLinkedList, void* pData, size_t ulSizeOfData) {
 	if (NULL == pLinkedList) {
 		return -1;

@@ -36,6 +36,17 @@ struct LinkedList_s {
 LinkedList_s* LinkedList_new();
 
 /**
+ * @brief Release a given instance of the struct LinkedList_s.
+ *
+ * This function can clear all nodes of the given linked list, and then release the given linked
+ * list. If you don't want to the linked list yet, you should call this function to release the
+ * resource of the linked list.
+ *
+ * @param pLinkedList Give the instance of the linked list to release the resource.
+ */
+void LinkedList_release(LinkedList_s* pLinkedList);
+
+/**
  * @brief Add a node at the front of the linked list.
  *
  * This function can create a node to store the given data, and then add the node at the front for

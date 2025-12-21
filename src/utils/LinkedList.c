@@ -101,3 +101,24 @@ void LinkedList_clearAllNodes(LinkedList_s* pLinkedList) {
 		LinkedList_removeNodeFront(pLinkedList);
 	} // End of while-loop
 } // End of LinkedList_clearAllNodes
+
+int LinkedList_addNodeRear(LinkedList_s* pLinkedList, void* pData, size_t ulSizeOfData) {
+	if (NULL == pLinkedList) {
+		return -1;
+	} // End of if-condition
+
+	if (NULL == pLinkedList->m_pHeadNode) {
+		return LinkedList_addNodeFront(pLinkedList, pData, ulSizeOfData);
+	} // End of if-condition
+
+	Node_s* pNewNode = Node_new(pData, ulSizeOfData);
+	if (NULL == pNewNode) {
+		return -1;
+	} // End of if-condition
+
+	pLinkedList->m_pTailNode->m_pNextNode = pNewNode;
+	pLinkedList->m_pTailNode = pNewNode;
+	pLinkedList->m_ulNumOfNode++;
+
+	return (NULL != pData && ulSizeOfData > 0) ? 0 : 1;
+} // End of LinkedList_addNodeRear

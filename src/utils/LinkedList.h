@@ -65,6 +65,24 @@ void LinkedList_release(LinkedList_s* pLinkedList);
 int LinkedList_addNodeFront(LinkedList_s* pLinkedList, void* pData, size_t ulSizeOfData);
 
 /**
+ * @brief Add a node at the rear for the linked list.
+ *
+ * This function can create a node to store the given data, and then add it at the rear for the
+ * linked list. Note, you also can give NULL as the data to add a node at the rear unless what you
+ * want to do. Otherwise, you shouldn't give NULL as the data. This function will create a node
+ * that contains NULL as teh data if you really give NULL as the data for the node.
+ *
+ * @param pLinkedList Give the point of the linked list to add a node at the rear.
+ * @param pData Give a data to add the node at the rear.
+ * @param ulSizeOfData Give the size of the given data.
+ *
+ * @return 0 Return this value if this function succeeds to add a new node at the rear for the linked list.
+ * @return 1 Return this value if this function succeeds to add a new node at the rear for the linked list. However, the new node has no data.
+ * @return -1 Return this value if this function fails to add a new node. The reason of this error is to give NULL for the parameter pLinkedList or fail to allocate the memory space for the new node.
+ */
+int LinkedList_addNodeRear(LinkedList_s* pLinkedList, void* pData, size_t ulSizeOfData);
+
+/**
  * @brief Pop the node at the front from the linked list.
  *
  * This function can pop the node at the front from the linked list.

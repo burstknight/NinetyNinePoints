@@ -101,6 +101,8 @@ void test_LinkedList_addNodeFront_RealData(void) {
 		iExpectedData--;
 	} // End of while-loop
 
+	TEST_ASSERT(0 == iExpectedData);
+
 	pIter = s_pLinkedList->m_pHeadNode;
 	while (true) {
 		if (NULL == pIter) {
@@ -196,6 +198,74 @@ void test_LinkedList_clearAllNodes(void) {
 	TEST_ASSERT(NULL == s_pLinkedList->m_pTailNode);
 } // End of test_LinkedList_clearAllNodes
 
+/**
+ * @brief Test the function LinkedList_addNodeRear() for giving NULL case.
+ */
+void test_LinkedList_addNodeRearNull(void) {
+	TEST_ASSERT(-1 == LinkedList_addNodeRear(s_pLinkedList, NULL, 0));
+
+	s_pLinkedList = LinkedList_new();
+	TEST_ASSERT(1 == LinkedList_addNodeRear(s_pLinkedList, NULL, 0));
+	TEST_ASSERT(1 == s_pLinkedList->m_ulNumOfNode);
+	TEST_ASSERT(NULL != s_pLinkedList->m_pHeadNode);
+	TEST_ASSERT(NULL != s_pLinkedList->m_pTailNode);
+	TEST_ASSERT(s_pLinkedList->m_pHeadNode == s_pLinkedList->m_pTailNode);
+
+	TEST_ASSERT(NULL == s_pLinkedList->m_pHeadNode->m_pData);
+	TEST_ASSERT(0 == s_pLinkedList->m_pHeadNode->m_ulSizeOfData);
+
+	LinkedList_clearAllNodes(s_pLinkedList);
+} // End of test_LinkedList_addNodeRearNull
+
+/**
+ * @brief Test the function LinkedList_addNodeRear() for giving zero data size case.
+ */
+void test_LinkedList_addNodeRear_ZeroDataSize(void) {
+	s_pLinkedList = LinkedList_new();
+	int iData = 99;
+	TEST_ASSERT(1 == LinkedList_addNodeRear(s_pLinkedList, &iData, 0));
+	TEST_ASSERT(1 == s_pLinkedList->m_ulNumOfNode);
+	TEST_ASSERT(NULL != s_pLinkedList->m_pHeadNode);
+	TEST_ASSERT(NULL != s_pLinkedList->m_pTailNode);
+	TEST_ASSERT(s_pLinkedList->m_pHeadNode == s_pLinkedList->m_pTailNode);
+
+	TEST_ASSERT(NULL == s_pLinkedList->m_pHeadNode->m_pData);
+	TEST_ASSERT(0 == s_pLinkedList->m_pHeadNode->m_ulSizeOfData);
+
+	LinkedList_clearAllNodes(s_pLinkedList);
+} // End of test_LinkedList_addNodeRear_ZeroDataSize
+
+/**
+ * @brief Test the function LinkedList_addNodeRear() for giving real datum case.
+ */
+void test_LinkedList_addNodeRear_RealData(void) {
+	s_pLinkedList = LinkedList_new();
+	for (int i = 1; i <= 3; i++) {
+		TEST_ASSERT(0 == LinkedList_addNodeRear(s_pLinkedList, &i, sizeof(int)));
+		TEST_ASSERT(i == s_pLinkedList->m_ulNumOfNode);
+	} // End of for-loop
+
+	TEST_ASSERT(3 == s_pLinkedList->m_ulNumOfNode);
+
+	int iExpectedData = 1;
+	Node_s* pIter = s_pLinkedList->m_pHeadNode;
+	TEST_ASSERT(NULL != pIter);
+	while (true) {
+		if (NULL == pIter) {
+			break;
+		} // End of if-condition
+
+		TEST_ASSERT(NULL != pIter->m_pData);
+		TEST_ASSERT(iExpectedData == *((int*)pIter->m_pData));
+		iExpectedData++;
+		pIter = pIter->m_pNextNode;
+	} // End of while-loop
+
+	TEST_ASSERT(3 == iExpectedData - 1);
+
+	LinkedList_clearAllNodes(s_pLinkedList);
+} // End of test_LinkedList_addNodeRear_RealData
+
 int main(int argc, char** argv) {
 	UnityBegin("./test_LinkedList.c");
 
@@ -226,6 +296,13 @@ int main(int argc, char** argv) {
 	 * Test the function LinkedList_clearAllNodes().
 	 */
 	RUN_TEST(test_LinkedList_clearAllNodes);
+
+	/*
+	 * Test the function LinkedList_addNodeRear().
+	 */
+	RUN_TEST(test_LinkedList_addNodeRearNull);
+	RUN_TEST(test_LinkedList_addNodeRear_ZeroDataSize);
+	RUN_TEST(test_LinkedList_addNodeRear_RealData);
 
 	return UnityEnd();
 } // End of main

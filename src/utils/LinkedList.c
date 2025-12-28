@@ -122,3 +122,28 @@ int LinkedList_addNodeRear(LinkedList_s* pLinkedList, void* pData, size_t ulSize
 
 	return (NULL != pData && ulSizeOfData > 0) ? 0 : 1;
 } // End of LinkedList_addNodeRear
+
+Node_s* LinkedList_popNodeRear(LinkedList_s* pLinkedList) {
+	if (NULL == pLinkedList) {
+		return NULL;
+	} // End of if-condition
+
+	if (NULL == pLinkedList->m_pTailNode) {
+		return NULL;
+	} // End of if-condition
+
+	Node_s* pNode = pLinkedList->m_pTailNode;
+	if (pLinkedList->m_pHeadNode == pNode) {
+		pLinkedList->m_pTailNode = NULL;
+		pLinkedList->m_pHeadNode = NULL;
+		pLinkedList->m_ulNumOfNode = 0;
+
+		return pNode;
+	} // End of if-condition
+
+	pLinkedList->m_pTailNode = pLinkedList->m_pTailNode->m_pPreNode;
+	pLinkedList->m_pTailNode->m_pNextNode = NULL;
+	pLinkedList->m_ulNumOfNode--;
+
+	return pNode;
+} // End of LinkedList_popNodeRear

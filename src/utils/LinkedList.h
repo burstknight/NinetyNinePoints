@@ -94,6 +94,17 @@ int LinkedList_addNodeRear(LinkedList_s* pLinkedList, void* pData, size_t ulSize
 Node_s* LinkedList_popNodeFront(LinkedList_s* pLinkedList);
 
 /**
+ * @brief Pop the node at the rear of the linked list.
+ *
+ * This function can pop the node at the rear of the linked list.
+ *
+ * @param pLinkedList Give the linked list to pop the node at the rear.
+ *
+ * @return Return the point of the popped node at the rear from the given linked list if the given linked list isn't empty. Otherwise, this function will return NULL.
+ */
+Node_s* LinkedList_popNodeRear(LinkedList_s* pLinkedList);
+
+/**
  * @brief Remove the node at the front for the linked list.
  *
  * This function can remove the node at the front for the given linked list.

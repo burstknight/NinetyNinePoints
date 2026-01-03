@@ -146,5 +146,7 @@ Node_s* LinkedList_popNodeRear(LinkedList_s* pLinkedList) {
 	pLinkedList->m_pTailNode->m_pNextNode = NULL;
 	pLinkedList->m_ulNumOfNode--;
 
+	pNode->m_pPreNode = NULL;
+
 	return pNode;
 } // End of LinkedList_popNodeRear

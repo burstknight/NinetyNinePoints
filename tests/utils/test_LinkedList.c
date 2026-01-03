@@ -266,6 +266,47 @@ void test_LinkedList_addNodeRear_RealData(void) {
 	LinkedList_clearAllNodes(s_pLinkedList);
 } // End of test_LinkedList_addNodeRear_RealData
 
+void test_LinkedList_popNodeRear_Null(void) {
+	TEST_ASSERT(NULL == LinkedList_popNodeRear(s_pLinkedList));
+
+	s_pLinkedList = LinkedList_new();
+	TEST_ASSERT(NULL == LinkedList_popNodeRear(s_pLinkedList));
+} // End of test_LinkedList_popNodeRear_Null
+
+void test_LinkedList_popNodeRear_RealData(void) {
+	s_pLinkedList = LinkedList_new();
+	for (int i = 1; i <= 3; i++) {
+		LinkedList_addNodeRear(s_pLinkedList, &i, sizeof(int));
+	} // End of for-loop
+	TEST_ASSERT(3 == s_pLinkedList->m_ulNumOfNode);
+
+	for (int i = 3; i >= 1; i--) {
+		Node_s* pExpectedNode = s_pLinkedList->m_pTailNode;
+		Node_s* pPoppedNode = LinkedList_popNodeRear(s_pLinkedList);
+
+		TEST_ASSERT(pPoppedNode == pExpectedNode);
+		TEST_ASSERT(NULL != pPoppedNode);
+		TEST_ASSERT(NULL == pPoppedNode->m_pNextNode);
+		TEST_ASSERT(NULL == pPoppedNode->m_pPreNode);
+		TEST_ASSERT(sizeof(int) == pPoppedNode->m_ulSizeOfData);
+		TEST_ASSERT(NULL != pPoppedNode->m_pData);
+		TEST_ASSERT(i == *((int*)pPoppedNode->m_pData));
+
+		TEST_ASSERT(i - 1 == s_pLinkedList->m_ulNumOfNode);
+		TEST_ASSERT(pPoppedNode != s_pLinkedList->m_pTailNode);
+
+		Node_release(pExpectedNode);
+		pExpectedNode = NULL;
+		pPoppedNode = NULL;
+	} // End of for-loop
+
+	TEST_ASSERT(0 == s_pLinkedList->m_ulNumOfNode);
+	TEST_ASSERT(NULL == s_pLinkedList->m_pHeadNode);
+	TEST_ASSERT(NULL == s_pLinkedList->m_pTailNode);
+
+	TEST_ASSERT(NULL == LinkedList_popNodeRear(s_pLinkedList));
+} // End of test_LinkedList_popNodeRear_RealData
+
 int main(int argc, char** argv) {
 	UnityBegin("./test_LinkedList.c");
 
@@ -303,6 +344,12 @@ int main(int argc, char** argv) {
 	RUN_TEST(test_LinkedList_addNodeRearNull);
 	RUN_TEST(test_LinkedList_addNodeRear_ZeroDataSize);
 	RUN_TEST(test_LinkedList_addNodeRear_RealData);
+
+	/*
+	 * Test the function LinkedList_popNodeRear().
+	 */
+	RUN_TEST(test_LinkedList_popNodeRear_Null);
+	RUN_TEST(test_LinkedList_popNodeRear_RealData);
 
 	return UnityEnd();
 } // End of main

@@ -117,6 +117,7 @@ int LinkedList_addNodeRear(LinkedList_s* pLinkedList, void* pData, size_t ulSize
 	} // End of if-condition
 
 	pLinkedList->m_pTailNode->m_pNextNode = pNewNode;
+	pNewNode->m_pPreNode = pLinkedList->m_pTailNode;
 	pLinkedList->m_pTailNode = pNewNode;
 	pLinkedList->m_ulNumOfNode++;
 

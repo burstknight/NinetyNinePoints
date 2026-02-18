@@ -122,4 +122,20 @@ void LinkedList_removeNodeFront(LinkedList_s* pLinkedList);
  */
 void LinkedList_clearAllNodes(LinkedList_s* pLinkedList);
 
+/**
+ * @brief Clone each element of the given array to the linked list.
+ *
+ * This function can clone each element of the given array to the linked list.
+ *
+ * @param pLinkedList Give the linked list to clone the datum from the given array.
+ * @param pData Give the array to clone datum to the linked list.
+ * @param ulSizeOfData Give the size of each element for the given array.
+ * @param ulLength Give the length of the given array.
+ *
+ * @return 0 Return this value if this function succeeds to clone the datum of the given array to the linked list.
+ * @return 1 Return this value if the linked list is NULL.
+ * @return -1 Return this value if this function fails to clone the datum of the given array to the linked list.
+ */
+int LinkedList_cloneFromArray(LinkedList_s* pLinkedList, void* pData, size_t ulSizeOfData, size_t ulLength);
+
 #endif // End of UTILS_LINKEDLIST_H

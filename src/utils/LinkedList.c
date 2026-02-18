@@ -150,3 +150,26 @@ Node_s* LinkedList_popNodeRear(LinkedList_s* pLinkedList) {
 
 	return pNode;
 } // End of LinkedList_popNodeRear
+
+int LinkedList_cloneFromArray(LinkedList_s* pLinkedList, void* pData, size_t ulSizeOfData, size_t ulLength) {
+	if (NULL == pData || 0 == ulSizeOfData || 0 == ulLength) {
+		return -1;
+	} // End of if-condition
+
+	if (NULL == pLinkedList) {
+		return 1;
+	} // End of if-condition
+
+	if (pLinkedList->m_ulNumOfNode > 0) {
+		LinkedList_clearAllNodes(pLinkedList);
+	} // End of if-condition
+
+	void* pIter = pData;
+	int iResult = 0;
+	for (size_t i = 0; i < ulLength; i++) {
+		pIter += i * ulSizeOfData;
+		iResult |= LinkedList_addNodeFront(pLinkedList, pIter, ulSizeOfData);
+	} // End of for-loop
+
+	return (0 == iResult) ? 0 : -1;
+} // End of LinkedList_cloneFromArray

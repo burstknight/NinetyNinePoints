@@ -152,12 +152,12 @@ Node_s* LinkedList_popNodeRear(LinkedList_s* pLinkedList) {
 } // End of LinkedList_popNodeRear
 
 int LinkedList_cloneFromArray(LinkedList_s* pLinkedList, void* pData, size_t ulSizeOfData, size_t ulLength) {
-	if (NULL == pData || 0 == ulSizeOfData || 0 == ulLength) {
-		return -1;
-	} // End of if-condition
-
 	if (NULL == pLinkedList) {
 		return 1;
+	} // End of if-condition
+
+	if (NULL == pData || 0 == ulSizeOfData || 0 == ulLength) {
+		return -1;
 	} // End of if-condition
 
 	if (pLinkedList->m_ulNumOfNode > 0) {

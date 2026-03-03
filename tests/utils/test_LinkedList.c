@@ -307,6 +307,22 @@ void test_LinkedList_popNodeRear_RealData(void) {
 	TEST_ASSERT(NULL == LinkedList_popNodeRear(s_pLinkedList));
 } // End of test_LinkedList_popNodeRear_RealData
 
+void test_LinkedList_cloneFromArray_Null(void) {
+	s_pLinkedList = NULL;
+	TEST_ASSERT(1 == LinkedList_cloneFromArray(s_pLinkedList, NULL, 0, 0));
+} // End of test_LinkedList_cloneFromArray_Null
+
+void test_LinkedList_cloneFromArray_ZeroData(void) {
+	s_pLinkedList = LinkedList_new();
+	TEST_ASSERT(NULL != s_pLinkedList);
+
+	TEST_ASSERT(-1 == LinkedList_cloneFromArray(s_pLinkedList, NULL, 0, 0));
+
+	int iData = 9;
+	TEST_ASSERT(-1 == LinkedList_cloneFromArray(s_pLinkedList, &iData, 0, 0));
+	TEST_ASSERT(-1 == LinkedList_cloneFromArray(s_pLinkedList, &iData, 1, 0));
+} // End of test_LinkedList_cloneFromArray_ZeroData
+
 int main(int argc, char** argv) {
 	UnityBegin("./test_LinkedList.c");
 
@@ -350,6 +366,12 @@ int main(int argc, char** argv) {
 	 */
 	RUN_TEST(test_LinkedList_popNodeRear_Null);
 	RUN_TEST(test_LinkedList_popNodeRear_RealData);
+
+	/*
+	 * Test the function LinkedList_cloneFromArray().
+	 */
+	RUN_TEST(test_LinkedList_cloneFromArray_Null);
+	RUN_TEST(test_LinkedList_cloneFromArray_ZeroData);
 
 	return UnityEnd();
 } // End of main

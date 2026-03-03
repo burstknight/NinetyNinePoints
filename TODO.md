@@ -13,4 +13,7 @@
 	- [ ] Implement the data structures for players.
 - [ ] Implement linked list.
 	- [x] Implement the node struct for linked list.
+	- [ ] The function `LinkedList_cloneFromArray()` need be test the case:
+		- [ ] Give an array to the linked list if the linked list is empty.
+		- [ ] Give an array to the linked list if the linked list has contained datum.
 
